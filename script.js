@@ -92,6 +92,27 @@ const departments = [
   }
 ];
 
+const main = document.querySelector('main');
+
+departments.forEach(dept => {
+  const section = document.createElement('section');
+
+  const heading = document.createElement('h2');
+  heading.textContent = dept.name;
+  section.appendChild(heading);
+
+  const list = document.createElement('ul');
+
+  dept.employees.forEach(emp => {
+    const item = document.createElement('li');
+    item.textContent = `${emp.firstName} ${emp.lastName}`;
+    list.appendChild(item);
+  });
+
+  section.appendChild(list);
+  main.appendChild(section);
+});
+
 const year = new Date().getFullYear();
 document.getElementById('copyright').textContent =
   `Copyright Pixell River Financial ${year}`;
