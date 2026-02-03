@@ -1,0 +1,45 @@
+export interface Role {
+  firstName: string;
+  lastName: string;
+  roleName: string;
+}
+
+export const roles: Role[] = [
+  { roleName: 'CEO/Chair of Board', firstName: 'Jo-Anne', lastName: 'Sinclair' },
+  { roleName: 'COO/VP Operations', firstName: 'Jackson', lastName: 'Smith' },
+  { roleName: 'CFO/VP Administration', firstName: 'Susan', lastName: 'Thomas' },
+  { roleName: 'VP Client Services', firstName: 'Richa', lastName: 'Kaur' },
+  { roleName: 'CIO', firstName: 'Josee', lastName: 'Benjamin' },
+  { roleName: 'VP Sales & Marketing', firstName: 'Vincent', lastName: 'Grey' },
+  { roleName: 'Director Financial and Audit Svcs', firstName: 'Rupa', lastName: 'Kharki' },
+  { roleName: 'Director Human Resources', firstName: 'Xun', lastName: 'Kuang' },
+  { roleName: 'Director Legal Services/General Counsel', firstName: 'Stien', lastName: 'Pedersen' },
+  { roleName: 'Director Information Technology', firstName: 'Sandra', lastName: 'Bear' },
+  { roleName: 'Director Information Security and CISSO', firstName: 'Gus', lastName: 'Blue' },
+  { roleName: 'Director Accounting', firstName: 'Sam', lastName: 'Kong' },
+  { roleName: 'Director Physical Security', firstName: 'Valentine', lastName: 'Smith' },
+  { roleName: 'Director Facilities', firstName: 'Mariya', lastName: 'Kaperski' },
+  { roleName: 'Manager, Business Continuity and Disaster Recovery', firstName: 'Abd al-Hamid', lastName: 'Alami' },
+  { roleName: 'Manager, Internal Audit', firstName: 'Victoria', lastName: 'Gray' },
+  { roleName: 'Chief Architect', firstName: 'Cheryl', lastName: 'Guru' },
+  { roleName: 'Manager, Security Architecture', firstName: 'Jean', lastName: 'Ngoy' },
+  { roleName: 'Solution Architect, Online Banking', firstName: 'Kris', lastName: 'Gold' },
+  { roleName: 'Manager, Application Solutions', firstName: 'Isaac', lastName: 'Smith' },
+  { roleName: 'Lead Developer, Online Banking', firstName: 'Payton', lastName: 'Frost' },
+  { roleName: 'Manager, Operational Risk', firstName: 'Samantha', lastName: 'Nettle' },
+  { roleName: 'Manager, Vendor Relations', firstName: 'Yolanda', lastName: 'Ferreira' },
+  { roleName: 'Manager, Purchasing', firstName: 'Samir', lastName: 'Hassan' },
+  { roleName: 'Manager, Communications', firstName: 'Yuna', lastName: 'Aikawa' },
+  { roleName: 'Manager Customer Experience and Community Eng.', firstName: 'Jonathan', lastName: 'Carberry' },
+  { roleName: 'Manager of Sales', firstName: 'Roland', lastName: 'Wei' },
+  { roleName: 'Manager, Marketing', firstName: 'Pran', lastName: 'Singh' },
+  { roleName: 'Business Analyst, Online Banking', firstName: 'Linda', lastName: 'Analyst' },
+  { roleName: 'Manager, Contract Management', firstName: 'Esra', lastName: 'Sedge' },
+  { roleName: 'Manager, Compliance Management', firstName: 'Pranee', lastName: 'Tan' },
+  { roleName: 'Manager IT End User Service Desk', firstName: 'Karmen', lastName: 'Spruce' },
+  { roleName: 'Manager IT End User Computing', firstName: 'Haydar', lastName: 'Katirci' },
+  { roleName: 'Manager IT Telecom and Infrastructure', firstName: 'Jill', lastName: 'Harkness' },
+  { roleName: 'Manager, Data Center and Hosting Services', firstName: 'Tim', lastName: 'Morrison' },
+  { roleName: 'Manager of IT Risk Management', firstName: 'Aleksandr', lastName: 'Milosevic' },
+  { roleName: 'Manager IT, project management office', firstName: 'Jim', lastName: 'Wingnut' },
+];
