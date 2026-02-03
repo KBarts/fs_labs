@@ -29,3 +29,43 @@ ul {
 li {
   margin: 0.25rem 0;
 }
+
+.app-nav {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 0.75rem 0 1.5rem;
+}
+
+.app-nav a {
+  text-decoration: none;
+  color: #2563eb;
+}
+
+.app-nav a.active {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.role-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.75rem 0 0;
+}
+
+.role-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.role-person {
+  font-weight: 600;
+}
+
+.role-title {
+  text-align: right;
+  color: #555;
+}
