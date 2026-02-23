@@ -1,61 +1,45 @@
-import { useMemo, useState } from 'react';
-import { departments as initialDepartments } from '../data/departments';
+import { useState } from 'react';
 import type { Department } from '../data/departments';
+import useFormInput from '../hooks/useFormInput';
+import employeeRepo from '../repositories/employeeRepo';
+import employeeService from '../services/employeeService';
+
+const service = employeeService(employeeRepo);
 
 function EmployeesPage() {
-  const [departments, setDepartments] = useState<Department[]>(initialDepartments);
-
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [departmentName, setDepartmentName] = useState('');
-
-  const [validationMessages, setValidationMessages] = useState<string[]>([]);
-
-  const departmentOptions = useMemo(
-    () => departments.map((d) => d.name),
-    [departments]
+  const [departments, setDepartments] = useState<Department[]>(
+    employeeRepo.getDepartments()
   );
+
+  const firstName = useFormInput('');
+  const lastName = useFormInput('');
+  const departmentName = useFormInput('');
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const errors: string[] = [];
+    firstName.clearMessages();
+    departmentName.clearMessages();
 
-    const trimmedFirst = firstName.trim();
-    const trimmedLast = lastName.trim();
-    const trimmedDept = departmentName.trim();
+    const result = service.createEmployee({
+      firstName: firstName.value,
+      lastName: lastName.value,
+      departmentName: departmentName.value
+    });
 
-    if (trimmedFirst.length < 3) {
-      errors.push('First Name must be at least 3 characters');
-    }
-
-    if (!trimmedDept) {
-      errors.push('Please select a Department.');
-    } else if (!departmentOptions.includes(trimmedDept)) {
-      errors.push('Employee must be added to existing Department');
-    }
-
-    if (errors.length > 0) {
-      setValidationMessages(errors);
+    if (result.firstNameMessages.length > 0 || result.departmentMessages.length > 0) {
+      firstName.setMessages(result.firstNameMessages);
+      departmentName.setMessages(result.departmentMessages);
       return;
     }
 
-    setValidationMessages([]);
+    if (result.departments) {
+      setDepartments(result.departments);
+    }
 
-    setDepartments((prev) =>
-      prev.map((dept) => {
-        if (dept.name !== trimmedDept) return dept;
-
-        return {
-          ...dept,
-          employees: [...dept.employees, { firstName: trimmedFirst, lastName: trimmedLast }]
-        };
-      })
-    );
-
-    setFirstName('');
-    setLastName('');
-    setDepartmentName('');
+    firstName.reset();
+    lastName.reset();
+    departmentName.reset();
   };
 
   return (
@@ -77,47 +61,46 @@ function EmployeesPage() {
       <section className="add-employee">
         <h2>Add Employee</h2>
 
-        {validationMessages.length > 0 && (
-          <ul className="validation-messages">
-            {validationMessages.map((msg) => (
-              <li key={msg}>{msg}</li>
-            ))}
-          </ul>
-        )}
-
         <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor="firstName">First Name</label>
-            <input
-              id="firstName"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
+            <input id="firstName" value={firstName.value} onChange={firstName.onChange} />
+            {firstName.messages.length > 0 && (
+              <ul className="validation-messages">
+                {firstName.messages.map((msg) => (
+                  <li key={msg}>{msg}</li>
+                ))}
+              </ul>
+            )}
           </div>
 
           <div>
             <label htmlFor="lastName">Last Name</label>
-            <input
-              id="lastName"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
+            <input id="lastName" value={lastName.value} onChange={lastName.onChange} />
           </div>
 
           <div>
             <label htmlFor="department">Department</label>
             <select
               id="department"
-              value={departmentName}
-              onChange={(e) => setDepartmentName(e.target.value)}
+              value={departmentName.value}
+              onChange={departmentName.onChange}
             >
               <option value="">Select department</option>
-              {departmentOptions.map((name) => (
-                <option key={name} value={name}>
-                  {name}
+              {departments.map((d) => (
+                <option key={d.name} value={d.name}>
+                  {d.name}
                 </option>
               ))}
             </select>
+
+            {departmentName.messages.length > 0 && (
+              <ul className="validation-messages">
+                {departmentName.messages.map((msg) => (
+                  <li key={msg}>{msg}</li>
+                ))}
+              </ul>
+            )}
           </div>
 
           <button type="submit">Add</button>
